@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "SearchBox":"../../components/SearchBox/index"
+  },
   "navigationBarTitleText": "分类"
 }

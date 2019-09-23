@@ -1,5 +1,6 @@
 let requestTimes=0
 export const request = (params) => {
+    //发送请求次数
     requestTimes++;
     //设置loading效果
     wx.showLoading({
@@ -19,9 +20,13 @@ export const request = (params) => {
             fail: (err) => {
                 reject(err);
             },
-            completed: () => {
+            complete: () => {
                 requestTimes--;
+          //请求全部发送完成后，隐藏loading效果
                 requestTimes===0 && wx.hideLoading();
+                // if(requestTimes===0){
+                //     wx.hideLoading()
+                // }
             }
         })
     })
