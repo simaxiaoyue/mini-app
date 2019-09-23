@@ -1,5 +1,8 @@
 .cate_content {
     display: flex;
+    /* 页面高度=屏幕高度-搜索框高度 
+    100vh为屏幕的高度,以及去掉tabbar高度
+    */
     height: ~'calc(100vh - 90rpx)';
     overflow: hidden;
 
@@ -18,6 +21,7 @@
 
         .active {
             color: var(--themeColor);
+            /* currentColor 跟当前字体颜色一样 */
             border-left: 3rpx solid currentColor;
         }
     }
@@ -25,7 +29,6 @@
     /* 右侧列表栏 */
     .cate_list {
         flex: 3;
-
         .cate_item_title {
             height: 80rpx;
             display: flex;
@@ -47,7 +50,8 @@
                 height: 100%;
                 width: 33.33%;
                 text-align: center;
-                image{
+
+                image {
                     width: 60%;
                 }
             }

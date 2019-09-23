@@ -1,5 +1,8 @@
 .cate_content {
   display: flex;
+  /* 页面高度=屏幕高度-搜索框高度 
+    100vh为屏幕的高度,以及去掉tabbar高度
+    */
   height: calc(100vh - 90rpx);
   overflow: hidden;
   /* 左侧菜单栏 */
@@ -18,6 +21,7 @@
 }
 .cate_content .menu_list .active {
   color: var(--themeColor);
+  /* currentColor 跟当前字体颜色一样 */
   border-left: 3rpx solid currentColor;
 }
 .cate_content .cate_list {
