@@ -1,7 +1,28 @@
 <SearchBox></SearchBox>
-<view class="menu_list">
-
+<view class="cate_content">
+  <!-- 左侧菜单 -->
+  <scroll-view scroll-y class="menu_list ">
+    <view class="menu_list_item {{currentIndex===index?'active':''}} " wx:for="{{menuList}}" wx:key="*this"
+      bindtap="changeMenu" data-index="{{index}}">
+      {{item}}
+    </view>
+  </scroll-view>
+  <!-- 右侧列表 -->
+  <scroll-view scroll-y class="cate_list">
+      <view class="cate_item" wx:for="{{cateList}}" wx:for-index="index1" wx:for-item="item1" wx:key="index1">
+          <view class="cate_item_title">
+            <text class="separator">/</text>
+            <text class="cate_title">{{item1.cat_name}}</text>
+            <text class="separator">/</text>
+          </view>
+          <view class="cate_item_content">
+            <navigator class="cate_content" wx:for="{{item1.children}}" wx:for-index="index2" wx:for-item="item2" wx:key="cat_id">
+              <image mode="widthFix" src="{{item2.cat_icon}}"></image>
+              <view class="item_name">{{item2.cat_name}}</view>
+            </navigator>
+          </view>
+        </view>
+  </scroll-view>
 </view>
-<view class="goods_list">
 
-</view>
+

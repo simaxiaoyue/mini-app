@@ -1,0 +1,56 @@
+.cate_content {
+    display: flex;
+    height: ~'calc(100vh - 90rpx)';
+    overflow: hidden;
+
+    /* 左侧菜单栏 */
+    .menu_list {
+        flex: 1;
+
+        .menu_list_item {
+            height: 80rpx;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* transparent 全透明黑色,解决active边框抖动 */
+            border: 3rpx solid transparent;
+        }
+
+        .active {
+            color: var(--themeColor);
+            border-left: 3rpx solid currentColor;
+        }
+    }
+
+    /* 右侧列表栏 */
+    .cate_list {
+        flex: 3;
+
+        .cate_item_title {
+            height: 80rpx;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30rpx;
+
+            .cate_title {
+                margin: 0 20rpx;
+            }
+        }
+
+        .cate_item_content {
+            display: flex;
+            flex-wrap: wrap;
+
+            .cate_content {
+                display: block;
+                height: 100%;
+                width: 33.33%;
+                text-align: center;
+                image{
+                    width: 60%;
+                }
+            }
+        }
+    }
+}
