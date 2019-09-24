@@ -3,7 +3,7 @@
     <view class="goodList_content" >
             <navigator class="goodList_item"
             wx:for="{{goodList}}"
-            wx:key="goods_id"
+            wx:key="item.goods_small_logo"
             url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
             >
               <view class="goodList_item_l">

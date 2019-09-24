@@ -44,23 +44,37 @@ Page({
       this.setData({
         goodList: [...oldList, ...newList] 
       })
-
+      //关闭下拉效果
+      wx.stopPullDownRefresh()
     })
   },
   //滚动条触底时触发
   onReachBottom() {
+    //判断当前页是否大于等于总页数,如果大,说明没有数据;如果小,获取下一页数据
     if (this.GoodQuery.pagenum >= this.totalPage) {
       this.setData({
         isExitData:true
       })
+      //提示框
      wx.showToast({
        title: '已经没有下一页了',
-       icon: 'none',
+       icon: 'none',//默认为success,一个对勾
        mask: true,
      });
     } else {
+      //当前页数+1,获取下一页数据
       this.GoodQuery.pagenum++;
       this.getGoodData()
     }
+  },
+    //下拉时触发
+  onPullDownRefresh: function () {
+    //重置页面
+    this.GoodQuery.pagenum=1;
+    this.setData({
+      goodsList:[],
+      isExitData:false
+    });
+    this.getGoodData()
   }
 })

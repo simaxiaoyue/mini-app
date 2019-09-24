@@ -1,8 +1,10 @@
 {
   "usingComponents": {
-    "SearchBox":"../../components/SearchBox/index",
-    "ChangeBar":"../../components/ChangeBar/index"
+    "SearchBox": "../../components/SearchBox/index",
+    "ChangeBar": "../../components/ChangeBar/index"
   },
-  "navigationBarTitleText": "商品列表"
+  "navigationBarTitleText": "商品列表",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 
 }
