@@ -9,6 +9,7 @@ page,view,text,swiper,swiper-item,navigator,image,button,input{
 image{
   width: 100%;
 }
+
 page{
   color: #666;
   font-size: 28rpx;

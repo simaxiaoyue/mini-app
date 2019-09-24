@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "SearchBox":"../../components/SearchBox/index",
+    "ChangeBar":"../../components/ChangeBar/index"
+  }
 }

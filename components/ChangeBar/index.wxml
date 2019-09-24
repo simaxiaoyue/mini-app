@@ -1,0 +1,15 @@
+<view class="change_bar">
+    <view class="change_bar_title">
+        <view class="title_content {{currentIndex===index?'active1':''}}" 
+         wx:for="{{titleList}}"
+         wx:key="id"
+         bindtap="getIndex"
+         data-index="{{index}}"
+         >
+            {{item.text}}
+        </view>
+    </view>
+    <view class="change_bar_content">
+        <slot></slot>
+    </view>
+</view>

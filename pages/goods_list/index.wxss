@@ -1,1 +1,40 @@
 /* pages/goods_list/index.wxss */
+.goodList_item {
+  display: flex;
+  border-bottom: 1rpx solid #ccc;
+  padding: 10rpx 0;
+}
+.goodList_item .goodList_item_l {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goodList_item .goodList_item_l image {
+  width: 80%;
+}
+.goodList_item .goodList_item_r {
+  flex: 2;
+  padding: 20rpx;
+  font-size: 30rpx;
+  display: flex;
+  /* 切换主轴方向 */
+  flex-direction: column;
+  justify-content: space-around;
+}
+.goodList_item .goodList_item_r .goodList_item_r_name {
+  color: #000;
+  overflow: hidden;
+  /* 溢出部分用...代替 */
+  text-overflow: ellipsis;
+  /* 将对象作为弹性伸缩盒子模型显示 */
+  display: -webkit-box;
+  /* 从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式） */
+  -webkit-box-orient: vertical;
+  /* 表示显示的行数 */
+  -webkit-line-clamp: 2;
+}
+.goodList_item .goodList_item_r .goodList_item_r_price {
+  font-size: 32rpx;
+  color: var(--themeColor);
+}

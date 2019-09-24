@@ -8,7 +8,7 @@
     </view>
   </scroll-view>
   <!-- 右侧列表 -->
-  <scroll-view scroll-y class="cate_list">
+  <scroll-view scroll-y scroll-top="{{scrollTop}} "class="cate_list">
       <view class="cate_item" wx:for="{{cateList}}" wx:for-index="index1" wx:for-item="item1" wx:key="index1">
           <view class="cate_item_title">
             <text class="separator">/</text>
@@ -16,7 +16,7 @@
             <text class="separator">/</text>
           </view>
           <view class="cate_item_content">
-            <navigator class="cate_content" wx:for="{{item1.children}}" wx:for-index="index2" wx:for-item="item2" wx:key="cat_id">
+            <navigator url="/pages/goods_list/index?cid={{item2.cat_id}}" class="cate_content" wx:for="{{item1.children}}" wx:for-index="index2" wx:for-item="item2" wx:key="cat_id">
               <image mode="widthFix" src="{{item2.cat_icon}}"></image>
               <view class="item_name">{{item2.cat_name}}</view>
             </navigator>

@@ -7,7 +7,9 @@ Page({
     //右侧列表数据
     cateList: [],
     // 当前索引
-    currentIndex: 0
+    currentIndex: 0,
+    //滚动条位置
+    scrollTop:0
   },
   //全局数据
   Cates: [],
@@ -65,7 +67,8 @@ Page({
     let cateList = this.Cates[index].children
     this.setData({
       currentIndex: index,
-      cateList
+      cateList,
+      scrollTop:0
     })
   }
 })

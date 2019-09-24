@@ -1,2 +1,22 @@
-<!--pages/goods_list/index.wxml-->
-<text>pages/goods_list/index.wxml</text>
+<SearchBox></SearchBox>
+<ChangeBar titleList="{{titleList}}">
+    <view class="goodList_content" wx:for="{{goodList}}" wx:key="goods_id">
+            <navigator class="goodList_item"
+            wx:for="{{goodList}}"
+            wx:key="goods_id"
+            url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
+            >
+              <view class="goodList_item_l">
+                <image mode="widthFix" src="{{item.goods_small_logo||'http://img2.imgtn.bdimg.com/it/u=1739624281,530295853&fm=26&gp=0.jpg'}}"></image>
+              </view>
+              <view class="goodList_item_r">
+                <view class="goodList_item_r_name">
+                  {{item.goods_name}}
+                </view>
+                <view class="goodList_item_r_price">
+                  ￥{{item.goods_price}} 
+                </view>
+              </view>
+            </navigator>
+    </view>
+</ChangeBar>

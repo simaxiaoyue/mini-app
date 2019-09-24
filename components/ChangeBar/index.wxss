@@ -1,0 +1,15 @@
+.change_bar .change_bar_title {
+  display: flex;
+  height: 90rpx;
+}
+.change_bar .change_bar_title .title_content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  font-size: 30rpx;
+}
+.change_bar .change_bar_title .active1 {
+  border-bottom: 1px solid var(--themeColor);
+}
