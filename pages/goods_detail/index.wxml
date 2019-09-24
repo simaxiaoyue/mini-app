@@ -1,0 +1,15 @@
+<view class="good_list">
+    <!--轮播图  -->
+    <view class="good_list_swiper">
+        <!-- 原图400*400 -->
+        <swiper circular autoplay indicator-dots>
+            <swiper-item class="good_list_swiper_content" wx:for="{{detailList.pics}}" wx:key="pics_id"
+                bindtap="showBigImg" data-current="{{item.pics_mid_url}}">
+                <image src="{{item.pics_mid_url}}" mode="aspectFit" />
+            </swiper-item>
+        </swiper>
+    </view>
+    <!--标题开始  -->
+
+
+</view>
