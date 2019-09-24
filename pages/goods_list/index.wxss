@@ -38,3 +38,7 @@
   font-size: 32rpx;
   color: var(--themeColor);
 }
+.tips {
+  margin: 10rpx 0;
+  text-align: center;
+}

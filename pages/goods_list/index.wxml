@@ -1,6 +1,6 @@
 <SearchBox></SearchBox>
 <ChangeBar titleList="{{titleList}}">
-    <view class="goodList_content" wx:for="{{goodList}}" wx:key="goods_id">
+    <view class="goodList_content" >
             <navigator class="goodList_item"
             wx:for="{{goodList}}"
             wx:key="goods_id"
@@ -19,4 +19,8 @@
               </view>
             </navigator>
     </view>
+    <view class="tips" wx:if="{{isExitData}}">
+    ------已经没有数据了😭------
+    </view>
+      
 </ChangeBar>

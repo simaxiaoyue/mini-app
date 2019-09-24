@@ -2,5 +2,7 @@
   "usingComponents": {
     "SearchBox":"../../components/SearchBox/index",
     "ChangeBar":"../../components/ChangeBar/index"
-  }
+  },
+  "navigationBarTitleText": "商品列表"
+
 }
