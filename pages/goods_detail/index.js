@@ -44,7 +44,8 @@ Page({
                 goods_name: detailList.goods_name,
                 goods_price: detailList.goods_price,
                 goods_small_logo: detailList.goods_small_logo,
-                num: 1
+                num: 1,
+                checked:true
             })
 
         } else {
