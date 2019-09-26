@@ -23,9 +23,25 @@ Page({
     //结算
     this.cuclOrderPay(carts);
   },
-  handleAdd() {
-    this.addAddress()
+  //点击商品前的多选框
+  checkBoxChange(e) {
+    //取出索引
+    const { index } = e.target.dataset
+    //取出购物车数据
+    const {carts}=this.data
+    //状态取反
+    carts[index].checked=!carts[index].checked
+    // console.log(carts);
+    //保存数据到本地
+    this.setData({
+      carts
+    })
+    wx.setStorageSync('carts', carts); 
+    //重新结算
+    this.cuclOrderPay(carts)
+
   },
+  //添加地址
   async addAddress() {
     try {
       // 获取用户的 授权状态
@@ -57,20 +73,19 @@ Page({
     //全选状态
     let allChecked = true
     carts.forEach(v => {
-      //计算总价
-      totalPrice += v.goods_price * v.num
-      //计算总数量
-      totalNum += v.num
+   
       if (!v.checked) {
         allChecked = false
-      } else {
-        allChecked = true
+      }else{
+      //计算总价
+        totalPrice += v.goods_price * v.num
+        //计算总数量
+        totalNum += v.num
       }
     })
     //存入data
     this.setData({
       totalPrice, totalNum, allChecked
     })
-
   }
 })

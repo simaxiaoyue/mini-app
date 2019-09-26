@@ -1,6 +1,6 @@
 <view class="address">
     <!-- address 可能是一个对象格式 也可能是一个空字符串  -->
-    <button wx:if="{{!address}}" type="primary"  plain  bindtap="handleAdd">获取收货地址</button>
+    <button wx:if="{{!address}}" type="primary"  plain  bindtap="addAddress">获取收货地址</button>
     <view wx:else class="address_info">
       <view class="address_info_name">
         <view>{{address.userName}}</view>
@@ -21,7 +21,7 @@
       >
         <!-- 复选框 -->
         <view class="cart_chb_wrap">
-            <checkbox-group >
+            <checkbox-group bindchange="checkBoxChange" data-index="{{index}}">
                 <checkbox checked="{{item.checked}}" ></checkbox>
             </checkbox-group>
         </view>
