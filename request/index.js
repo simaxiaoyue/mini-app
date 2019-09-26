@@ -1,4 +1,4 @@
-let requestTimes=0
+let requestTimes = 0
 export const request = (params) => {
     //发送请求次数
     requestTimes++;
@@ -22,12 +22,56 @@ export const request = (params) => {
             },
             complete: () => {
                 requestTimes--;
-          //请求全部发送完成后，隐藏loading效果
-                requestTimes===0 && wx.hideLoading();
+                //请求全部发送完成后，隐藏loading效果
+                requestTimes === 0 && wx.hideLoading();
                 // if(requestTimes===0){
                 //     wx.hideLoading()
                 // }
             }
         })
+    })
+}
+
+
+export const getSetting = () => {
+    return new Promise((resolve, reject) => {
+        wx.getSetting({
+            success: (result) => {
+                resolve(result)
+            },
+            fail: (err) => {
+                reject(err)
+            },
+            complete: () => { }
+        });
+
+    })
+}
+export const openSetting = () => {
+    return new Promise((resolve, reject) => {
+        wx.openSetting({
+            success: (result) => {
+                resolve(result)
+            },
+            fail: (err) => {
+                reject(err)
+            },
+            complete: () => { }
+        });
+
+    })
+}
+export const chooseAddress = () => {
+    return new Promise((resolve, reject) => {
+        wx.chooseAddress({
+            success: (result) => {
+                resolve(result)
+            },
+            fail: (err) => {
+                reject(err)
+            },
+            complete: () => { }
+        });
+
     })
 }

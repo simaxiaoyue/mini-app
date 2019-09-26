@@ -1,5 +1,5 @@
 <view class="cart">
     <view class="cart_address">
-        <button type="primary" plain bindtap="addAddress">添加收货地址</button>
+        <button type="primary" plain open-type="" bindtap="addAddress">添加收货地址</button>
     </view>
 </view>
