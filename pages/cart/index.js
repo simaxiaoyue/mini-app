@@ -1,5 +1,5 @@
 import regeneratorRuntime from '../../lib/runtime/runtime';
-import { getSetting, openSetting, chooseAddress, showModal } from "../../request/index.js";
+import { getSetting, openSetting, chooseAddress, showModal ,showToast} from "../../request/index.js";
 
 Page({
   data: {
@@ -23,6 +23,32 @@ Page({
     //结算
     this.cuclOrderPay(carts);
   },
+  //点击结算按钮
+ async tapPay(){
+    const{totalNum,address}=this.data
+    //判断购物车是否有商品
+    if (totalNum === 0) {
+      await showToast({
+        title: "您还没选购商品",
+        icon: 'none',
+        mask: true
+      });
+      return;
+    }
+    //判断是否添加了收货地址
+    if (address === "") {
+      await showToast({
+        title: "请选择收货地址",
+        icon: 'none',
+        mask: true
+      });
+      return;
+    }
+    //跳转页面
+    wx.navigateTo({
+      url: '/pages/pay/index'
+    });
+  },
   //点击加减商品
   async numChange(e) {
     // console.log(e);
@@ -39,7 +65,7 @@ Page({
       if (res) {
         carts.splice(index, 1)
       }
-    }else{
+    } else {
       carts[index].num += change
     }
     //保存数据到本地
@@ -88,7 +114,7 @@ Page({
       //存入本地
       wx.setStorageSync('address', res2);
     } catch (error) {
-     
+
     }
   },
   //结算
@@ -110,6 +136,8 @@ Page({
         totalNum += v.num
       }
     })
+    //判断是否为空
+    allChecked = carts.length === 0 ? false : true;
     //存入data
     this.setData({
       totalPrice, totalNum, allChecked

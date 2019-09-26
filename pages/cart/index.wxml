@@ -60,7 +60,7 @@
       <view class="total_price1"> 合计 <text>￥ {{totalPrice}} </text> </view>
       <view class="total_price2">包含运费</view>
     </view>
-    <view class="cart_order" bindtap="handleOrderPay" >
+    <view class="cart_order" bindtap="tapPay" >
       结算({{totalNum}})
     </view>
   </view>
