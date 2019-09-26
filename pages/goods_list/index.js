@@ -1,5 +1,5 @@
 import { request } from "../../request/index.js";
-
+import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     titleList: [
@@ -29,16 +29,16 @@ Page({
 
   },
   //获取商品列表
-  getGoodData() {
-    request({
+  async getGoodData() {
+   let res=await request({
       url: "/goods/search",
       data: this.GoodQuery
-    }).then(res => {
+    })
       // console.log(res);
-      let newList = res.data.message.goods;
+      let newList = res.goods;
       let oldList = this.data.goodList;
       //获取数据总条数
-      let total = res.data.message.total;
+      let total = res.total;
       //计算总页数
       this.totalPage = Math.ceil(total / this.GoodQuery.pagesize)
       this.setData({
@@ -46,7 +46,6 @@ Page({
       })
       //关闭下拉效果
       wx.stopPullDownRefresh()
-    })
   },
   //滚动条触底时触发
   onReachBottom() {

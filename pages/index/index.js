@@ -1,6 +1,5 @@
-
 import { request } from "../../request/index.js"
-
+import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     swiperData: [],
@@ -17,33 +16,26 @@ Page({
     this.getFloorData()
   },
   //获取轮播图数据
-  getSwiperData() {
-    request({ url: "/home/swiperdata" })
-      .then(res => {
-        // console.log(res);
-        this.setData({
-          swiperData: res.data.message
-        })
-      })
+  async getSwiperData() {
+    let res = await request({ url: "/home/swiperdata" })
+    this.setData({
+      swiperData: res
+    })
   },
   //获取导航数据
-  getCatItems() {
-    request({ url: "/home/catitems" })
-      .then(res => {
-        // console.log(res);
-        this.setData({
-          navData: res.data.message
-        })
-      })
+  async getCatItems() {
+    let res = await request({ url: "/home/catitems" })
+    // console.log(res);
+    this.setData({
+      navData: res
+    })
   },
   //获取列表数据
-  getFloorData() {
-    request({ url: "/home/floordata" })
-      .then(res => {
-        // console.log(res);
-        this.setData({
-          floorData: res.data.message
-        })
-      })
+  async getFloorData() {
+    let res = await request({ url: "/home/floordata" })
+    // console.log(res);
+    this.setData({
+      floorData: res
+    })
   }
 })

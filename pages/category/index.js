@@ -1,5 +1,5 @@
 import { request } from "../../request/index.js"
-
+import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     //左侧菜单数据
@@ -41,11 +41,10 @@ Page({
 
 
   //获取分类数据
-  getCateData() {
-    request({ url: "/categories" })
-      .then(res => {
+  async getCateData() {
+   let res= await request({ url: "/categories" })
         // console.log(res);
-        this.Cates = res.data.message
+        this.Cates = res
         //缓存数据
         wx.setStorageSync('hmyg', {
           data: this.Cates,
@@ -59,7 +58,6 @@ Page({
         this.setData({
           menuList, cateList
         })
-      })
   },
   //点击菜单切换
   changeMenu(e) {
