@@ -39,9 +39,9 @@
           <view class="cart_tool">
             <view class="goods_price">￥{{item.goods_price}}</view>
             <view class="goods_nums_wrap">
-              <view class="btn_num" >-</view>
+              <view class="btn_num" bindtap="numChange" data-change="{{-1}}"  data-index="{{index}}">-</view>
               <view class="goods_num">{{item.num}}</view>
-              <view class="btn_num" >+</view>
+              <view class="btn_num" bindtap="numChange" data-change="{{1}}"  data-index="{{index}}">+</view>
             </view>
           </view>
         </view>

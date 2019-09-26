@@ -75,3 +75,13 @@ export const chooseAddress = () => {
 
     })
 }
+export const showModal = (params) => {
+    return new Promise((resolve, reject) => {
+        wx.showModal({
+            ...params,
+            success: (result) => {
+                resolve(result.confirm)
+            }
+        });
+    })
+}

@@ -1,5 +1,5 @@
 import regeneratorRuntime from '../../lib/runtime/runtime';
-import { getSetting, openSetting, chooseAddress } from "../../request/index.js";
+import { getSetting, openSetting, chooseAddress, showModal } from "../../request/index.js";
 
 Page({
   data: {
@@ -23,20 +23,47 @@ Page({
     //结算
     this.cuclOrderPay(carts);
   },
+  //点击加减商品
+  async numChange(e) {
+    // console.log(e);
+    //获得+1或-1操作
+    const { change, index } = e.target.dataset
+    //取出购物车数据
+    const { carts } = this.data
+    // -1时判断num是否已经为1
+    if (carts[index].num === 1 && change === -1) {
+      let res = await showModal({
+        title: '警告',
+        content: '您确定要删除吗？',
+      })
+      if (res) {
+        carts.splice(index, 1)
+      }
+    }else{
+      carts[index].num += change
+    }
+    //保存数据到本地
+    this.setData({
+      carts
+    })
+    wx.setStorageSync('carts', carts);
+    //重新结算
+    this.cuclOrderPay(carts)
+  },
   //点击商品前的多选框
   checkBoxChange(e) {
     //取出索引
     const { index } = e.target.dataset
     //取出购物车数据
-    const {carts}=this.data
+    const { carts } = this.data
     //状态取反
-    carts[index].checked=!carts[index].checked
+    carts[index].checked = !carts[index].checked
     // console.log(carts);
     //保存数据到本地
     this.setData({
       carts
     })
-    wx.setStorageSync('carts', carts); 
+    wx.setStorageSync('carts', carts);
     //重新结算
     this.cuclOrderPay(carts)
 
@@ -61,7 +88,7 @@ Page({
       //存入本地
       wx.setStorageSync('address', res2);
     } catch (error) {
-      console.log(error);
+     
     }
   },
   //结算
@@ -73,11 +100,11 @@ Page({
     //全选状态
     let allChecked = true
     carts.forEach(v => {
-   
+
       if (!v.checked) {
         allChecked = false
-      }else{
-      //计算总价
+      } else {
+        //计算总价
         totalPrice += v.goods_price * v.num
         //计算总数量
         totalNum += v.num
