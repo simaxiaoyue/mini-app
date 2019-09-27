@@ -96,5 +96,33 @@ export const showToast = (params) => {
         });
     })
 }
+export const login = () => {
+    return new Promise((resolve, reject) => {
+        wx.login({
+            timeout: 1000,
+            success: (result) => {
+                resolve(result)
+            },
+            fail: (err) => {
+                reject(err);
+            }
+        });
 
-  
+    })
+}
+
+export const requestPayment = (pay) => {
+    return new Promise((resolve, reject) => {
+        wx.requestPayment({
+            ...pay,
+            success: (result) => {
+                resolve(result)
+            },
+            fail: () => { },
+            complete: () => { }
+        });
+
+    })
+}
+
+

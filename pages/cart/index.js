@@ -137,7 +137,7 @@ Page({
       }
     })
     //判断是否为空
-    allChecked = carts.length === 0 ? false : true;
+    allChecked = carts.length === 0 ? false : allChecked;
     //存入data
     this.setData({
       totalPrice, totalNum, allChecked
