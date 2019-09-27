@@ -1,61 +1,66 @@
-import regeneratorRuntime from '../../lib/runtime/runtime';
-import { request, requestPayment,showToast } from "../../request/index.js";
 
+import regeneratorRuntime from '../../lib/runtime/runtime';
+import { request, requestPayment, showToast } from "../../request/index.js";
 Page({
   data: {
-    //地址信息
+    // 用户收货信息
     address: {},
-    //购物信息
+    // 购物车数据
     carts: [],
-    //总价格
+    // 总价格
     totalPrice: 0,
-    //总数量
+    // 总数量
     totalNum: 0
   },
+
   onShow() {
-    //获取缓存中的收货地 
+    // 获取缓存中的收货地址 
     const address = wx.getStorageSync("address");
-    //获取缓存中的购物车数据
-    let carts = wx.getStorageSync("carts");
-    //
+    // 3 获取缓存中的购物车数据
+    let carts = wx.getStorageSync("carts") || [];
     carts = carts.filter(v => v.checked);
-    this.setData({ carts, address });
-    //结算
-    this.cuclOrderPay(carts);
+    this.setData({ carts, address })
+    this.countData(carts);
   },
-  //结算
-  cuclOrderPay(carts) {
-    //总价
-    let totalPrice = 0
-    //总数量
-    let totalNum = 0
-    carts.forEach(v => {
+  // 计算数据
+  countData(carts) {
+    //  要 元素的选中属性  checked=true 来计算价格 
+    let totalPrice = 0;
+    // 要 元素的选中属性  checked=true 来计算  数量
+    let totalNum = 0;
+    carts.forEach((v, i) => {
       if (v.checked) {
-        //计算总价
-        totalPrice += v.goods_price * v.num
-        //计算总数量
-        totalNum += v.num
+        // 计算价格和数量
+        totalPrice += v.num * v.goods_price;
+        totalNum += v.num;
       }
-    })
-    //存入data
+    });
     this.setData({
-      totalPrice, totalNum
+      totalPrice,
+      totalNum
     })
   },
-  //点击支付
-  async tapToPay() {
-    let token = wx.getStorageSync("token");
+  // 点击支付按钮
+  handleOrderPay() {
+    this.orderPay();
+  },
+
+  // 执行支付的逻辑
+  async orderPay() {
+    try {
+      
+    // 判断有没有token
+    const token = wx.getStorageSync("token");
     if (!token) {
       wx.navigateTo({
-        url: '/pages/auth/index',
+        url: '/pages/auth/index'
       });
-      return
+      return;
     }
-    //获取收货地址,订单数组
-    const { address, carts, totalPrice } = this.data
+    // 获取订单参数
+    const { totalPrice, address, carts } = this.data;
     const order_price = totalPrice;
     const consignee_addr = address.detailAddress;
-    //获取订单数组所需参数
     const goods = carts.map(v => {
       return {
         goods_id: v.goods_id,
@@ -63,26 +68,29 @@ Page({
         goods_price: v.goods_price
       }
     });
-    //创建订单所需参数
-    const orderData = {
+
+    const orderParams = {
       order_price, consignee_addr, goods
     }
-    //创建订单,获取订单号
-    const { order_number } = await request({ url: "/my/orders/create", method: "post", data: orderData, header: { Authorization: token } });
-    //获得支付参数
-    const { pay } = await request({ url: "/my/orders/req_unifiedorder", method: "post", data: { order_number }, header: { Authorization: token } });
-    //调起微信内置的支付
+    // 创建订单
+    const { order_number } = await request({ url: "/my/orders/create", method: "post", data: orderParams });
+    //获取支付参数
+    const { pay } = await request({ url: "/my/orders/req_unifiedorder", method: "post", data: { order_number } });
+    // 调起微信内置的支付
     await requestPayment(pay);
-    //查询订单支付状态
-    const message = await request({ url: "/my/orders/chkOrder", method: "post", data: { order_number }, header: { Authorization: token } });
-    await showToast({ title: message, mask: true });
-    //
-    let localCarts=wx.getStorageSync("carts");
+    //查询刚才的订单支付状态
+    const message = await request({ url: "/my/orders/chkOrder", method: "post", data: { order_number } });
 
+    await showToast({ title: message, mask: true });
+ 
+    let localCarts=wx.getStorageSync("carts");
     wx.setStorageSync("carts", localCarts.filter(v=>!v.checked));
     wx.navigateTo({
       url: '/pages/order/index',
     });
- 
+    } catch (error) {
+        console.log(error);
+    }
   }
+
 })

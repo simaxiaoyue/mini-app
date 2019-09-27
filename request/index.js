@@ -1,5 +1,9 @@
 let requestTimes = 0
 export const request = (params) => {
+    let header = {...params.header};
+    if (params.url.includes("/my/")) {
+        header["Authorization"] = wx.getStorageSync("token");
+      }
     //发送请求次数
     requestTimes++;
     //设置loading效果
@@ -13,6 +17,7 @@ export const request = (params) => {
     return new Promise((resolve, reject) => {
         wx.request({
             ...params,
+            header,
             url: baseUrl + params.url,
             success: (result) => {
                 resolve(result.data.message);

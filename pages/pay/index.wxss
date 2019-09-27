@@ -17,12 +17,6 @@
   border-bottom: 1rpx solid #ccc;
   padding: 5rpx 0;
 }
-.cart .cart_list .cart_item .cart_chb_wrap {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .cart .cart_list .cart_item .cart_img_wrap {
   flex: 2;
   display: flex;
@@ -76,12 +70,6 @@
   bottom: 0;
   border-top: 1rpx solid #ccc;
   display: flex;
-}
-.btm_cart .cart_all_wrap {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .btm_cart .total_price_wrap {
   text-align: right;
