@@ -80,9 +80,7 @@ Page({
     await requestPayment(pay);
     //查询刚才的订单支付状态
     const message = await request({ url: "/my/orders/chkOrder", method: "post", data: { order_number } });
-
     await showToast({ title: message, mask: true });
- 
     let localCarts=wx.getStorageSync("carts");
     wx.setStorageSync("carts", localCarts.filter(v=>!v.checked));
     wx.navigateTo({

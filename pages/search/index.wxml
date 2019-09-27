@@ -1,2 +1,14 @@
-<!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<view class="search_view">
+    <view class="search_form">
+      <input value="{{inputValue}}" type="text"  bindinput="getInput" />
+      <button wx:if="{{isSearch}}" bindtap="tapCancel" >取消</button>
+    </view>
+    <view class="search_list">
+      <navigator
+      wx:for="{{searchList}}"
+      wx:key="goods_id"
+      url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
+      >{{item.goods_name}}</navigator>
+    </view>
+  
+  </view>
